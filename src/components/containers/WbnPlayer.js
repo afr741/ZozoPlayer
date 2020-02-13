@@ -23,7 +23,7 @@ const themeLight = {
   color: '#353535'
 };
 
-const WbnPlayer = props => {
+const WbnPlayer = ({ match, history, location }) => {
   const videos = JSON.parse(document.querySelector('[name = "videos"]').value);
 
   const [state, setState] = useState({
@@ -33,7 +33,22 @@ const WbnPlayer = props => {
     playlistId: videos.playlistId,
     autoplay: false
   });
+  useEffect(() => {
+    const videoId = match.params.activeVideo;
+    if (videoId !== undefined) {
+      const newActiveVideo = state.videos.findIndex(
+        video => video.id === video.id
+      )
+      setState(prev=>{
+        ...prev,
+        activeVideo, prev.videos[newActiveVideo],
+        autoplay: location.autoplayd
 
+      })
+    } else{
+
+    }
+  });
   const nightModeCallback = () => {};
 
   const endCallback = () => {};
